@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess My Number</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cont">
+        <h1 id="hh">I am thinking of a number between 1 to 100</h1>
+        <h2 id='hhh'>Can you guess it?</h2>
+        <div class="input">
+            <input type="number" id="input">
+        </div>
+        <button id="button">GUESS</button>
+        <p id="result">Here The Hint</p>
+        <p id="attempts">Here The Guesses Attempted</p>
+        <marquee behavior="" direction=""><p id="reset"></p></marquee>
+    </div>
+
+    <div class="vtv"><a href="https://github.com/vtvboopathi">vtv_boopathi</a></div>
+
+<script>
+
+    const guess = document.getElementById('input')
+    const button = document.getElementById('button')
+    const result = document.getElementById('result')
+    const attempts = document.getElementById('attempts')
+    const id = document.getElementById('reset')
+    const hh = document.getElementById('hh')
+    const hhh = document.getElementById('hhh')
+
+    let attempt
+    let randomNumber
+
+    const init = () => {
+        attempt = 0;
+        randomNumber = getRandomNum()
+    }
+
+    const getRandomNum = () => {
+        const randomNumber = Math.trunc(Math.random() * 100 ) + 1
+        return randomNumber;
+    }
+
+    button.addEventListener('click', () => {
+        const userGuess = Number(guess.value)
+
+        if(userGuess > randomNumber){
+            result.innerText = `Your Guess Is High`
+            attempts.innerText = `You Have Attempted ${attempt} Guesses`
+            attempt += 1
+        }
+        else if(userGuess < randomNumber) {
+            result.innerText = `Your Guess Is Low`
+            attempts.innerText = `You Have Attempted ${attempt} Guesses`
+            attempt += 1
+        }
+        else if(userGuess === randomNumber){
+            result.innerText = `The Answer Is '${randomNumber}'`
+            attempts.innerText = `You Took ${attempt} Attempts To Answer Correctly`
+            button.style.display = 'none'
+            reset.innerText = 'Please Refresh The Page To Play Again'
+            guess.style.display = 'none'
+            hh.innerText = `You Won The Game`
+            hhh.style.display = 'none'
+        }
+        else{
+            alert('You should enter a number')
+        }
+    })
+
+    init() 
+
+    console.log(randomNumber)
+
+</script>
+</body>
+</html>
